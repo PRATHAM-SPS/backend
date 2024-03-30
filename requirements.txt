@@ -1,0 +1,16 @@
+flask
+fpdf
+pandas
+numpy
+pandas
+flask_cors
+scikit-learn
+requests
+Pillow
+gunicorn == 20.0.4
+tensorflow
+openai
+requests
+python-dotenv
+werkzeug
+pymongo
