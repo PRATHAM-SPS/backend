@@ -12,11 +12,9 @@ from fertilizer import fertilizer_dic
 import requests
 import io
 from PIL import Image
-from model import ResNet9
 from crop_predict import Crop_Predict
 import os
 from PIL import Image
-import CNN
 import openai
 import datetime 
 import google.generativeai as genai
@@ -58,41 +56,6 @@ genai.configure(api_key=geminikey)
 app = Flask(__name__)
 CORS(app)
 
-# Model saved with Keras model.save()
-MODEL_PATH ='./test.h5'
-data = pd.read_csv("Crop1.csv").loc[:,"Crop"]
-
-# Load your trained model
-model = load_model(MODEL_PATH)
-
-def model_predict(img_path, model):
-    print(img_path)
-    img = image.load_img(img_path, target_size=(512, 512))
-    # Preprocessing the image
-    x = image.img_to_array(img)
-    # x = np.true_divide(x, 255)
-    ## Scaling
-    x=x/255
-    x = np.expand_dims(x, axis=0)
-
-
-    # Be careful how your trained model deals with the input
-    # otherwise, it won't make correct prediction!
-   # x = preprocess_input(x)
-
-    preds = model.predict(x)
-    preds=np.argmax(preds, axis=1)
-    if preds==0:
-        preds="Brownspot"
-    elif preds==1:
-        preds="Healthy"
-    else :
-        preds="Woodiness"
-
-
-    return preds
-
-
 
 
 # prediction function
@@ -124,6 +87,10 @@ def WeatherPredictor(to_predict_list):
 @app.route("/", methods=["GET"])
 def home():
     return "server started..."
+
+@app.route('/hello')
+def hello_world():
+	return 'Hello World!'
 
 
 # @app.route("/crop-predict2", methods=["POST"])
