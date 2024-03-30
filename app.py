@@ -11,10 +11,8 @@ from disease import disease_dic
 from fertilizer import fertilizer_dic
 import requests
 import io
-from PIL import Image
 from crop_predict import Crop_Predict
 import os
-from PIL import Image
 import openai
 import datetime 
 import google.generativeai as genai
